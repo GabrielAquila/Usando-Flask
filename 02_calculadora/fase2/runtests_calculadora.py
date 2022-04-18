@@ -29,33 +29,43 @@ class TestStringMethods(unittest.TestCase):
          r1 = requests.get("http://localhost:5000/resultado",params={'a':10,"b":0, "ope":"div"})
          if "ERRO" not in r1.text:
              self.fail("10/0 deveria ter dado um ERRO; a string 'ERRO' deve aparecer na pagina")
+         if "Traceback" in r1.text:
+             self.fail("recebi a tela de debug do flask")
 
      def test_05_a_inteiro(self):
          r1 = requests.get("http://localhost:5000/resultado",params={'a':'banana',"b":20, "ope":"soma"})
          if "ERRO" not in r1.text:
-             self.fail("Enviei um a inválido, esperava um ERRO")
-
+             self.fail("Enviei um a inválido, esperava um ERRO; a string 'ERRO' deve aparecer na pagina")
+         if "Traceback" in r1.text:
+             self.fail("recebi a tela de debug do flask")
      def test_05_b_inteiro(self):
          r1 = requests.get("http://localhost:5000/resultado",params={'b':'banana',"a":20, "ope":"soma"})
          if "ERRO" not in r1.text:
-             self.fail("Enviei um b inválido, esperava um ERRO")
-
+             self.fail("Enviei um b inválido, esperava um ERRO; a string 'ERRO' deve aparecer na pagina")
+         if "Traceback" in r1.text:
+             self.fail("recebi a tela de debug do flask")
      def test_06_incompleto(self):
          r1 = requests.get("http://localhost:5000/resultado",params={"b":20, "ope":"sub"})
          if "ERRO" not in r1.text:
-             self.fail("Enviei dados incompletos (faltava a) e esperava um ERRO")
-
+             self.fail("Enviei dados incompletos (faltava a) e esperava um ERRO; a string 'ERRO' deve aparecer na pagina")
+         if "Traceback" in r1.text:
+             self.fail("recebi a tela de debug do flask")
      
      def test_07_b_incompleto(self):
+         print("parazzi")
          r1 = requests.get("http://localhost:5000/resultado",params={"a":20, "ope":"sub"})
+         print("tamanho",len(r1.text.split("ERRO")))
          if "ERRO" not in r1.text:
-             self.fail("Enviei dados incompletos (faltava a) e esperava um ERRO")
+             self.fail("Enviei dados incompletos (faltava a) e esperava que a resposta tivesse a string 'ERRO'")
+         if "Traceback" in r1.text:
+             self.fail("recebi a tela de debug do flask")
 
      def test_08_ope_incompleto(self):
          r1 = requests.get("http://localhost:5000/resultado",params={"a":20, "b":10})
          if "ERRO" not in r1.text:
-             self.fail("Enviei dados incompletos (faltava ope) e esperava um ERRO")     
-
+             self.fail("Enviei dados incompletos (faltava ope) e esperava que a resposta tivesse a string 'ERRO'")     
+         if "Traceback" in r1.text:
+             self.fail("recebi a tela de debug do flask")
      
      
 def runTests():
