@@ -46,7 +46,7 @@ def resultado():
     except ZeroDivisionError:
         return 'ERRO: Não é possivel dividir por 0'
     except ValueError:
-        return 'ERRO : Enviei um a inválido, esperava um ERRO'
+        return 'ERRO : Enviei um parametro inválido, esperava um ERRO'
     except Exception :
         return 'ERRO : Enviei dados incompletos (faltava ope) e esperava um ERRO'
 
